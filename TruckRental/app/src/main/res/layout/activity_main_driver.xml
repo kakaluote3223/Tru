@@ -1,0 +1,108 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context="com.computer.hdu.truckrental.DriverMainActivity"
+    android:background="@color/colorWhite">
+
+    <!--Toolbar-->
+    <!--include layout="@layout/custom_toolbar"></include>-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_driver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@color/colorTransparent"
+                android:src="@drawable/btn_driver_info"
+                android:id="@+id/driver_info_btn" />
+
+            <!--<android.support.v7.widget.SwitchCompat-->
+            <Switch
+                android:textOff="@string/prompt_driver_resting"
+                android:textOn="@string/prompt_driver_working"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:typeface="normal"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/switch1"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <!--DrawerLayout-->
+    <android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawerlayout_driver"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--主布局-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ListView
+                android:id="@+id/main_driver_list"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_squares_white">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/action_driver_orders"
+                    android:onClick="show_orders"
+                    android:drawableTop="@drawable/btn_all_orders"
+                    android:background="@color/colorTransparent"
+                    android:id="@+id/driver_orders_btn" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/action_driver_record"
+                    android:onClick="show_orders"
+                    android:drawableTop="@drawable/btn_record"
+                    android:background="@color/colorTransparent"
+                    android:id="@+id/driver_record_btn" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--侧滑布局-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:layout_gravity="start">
+            <ListView
+                android:id="@+id/driver_left_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>
