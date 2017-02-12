@@ -7,10 +7,10 @@ import android.os.Bundle;
  * Created by yjt on 2017/2/11.
  */
 
-public class ShowDriverAllOrdersActivity extends Activity{
+public class DriverCompletedOrdersShowActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_driver_completed_orders);
+        setContentView(R.layout.activity_show_completed_orders_driver);
     }
 }

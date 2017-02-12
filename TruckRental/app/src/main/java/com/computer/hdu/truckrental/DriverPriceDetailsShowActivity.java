@@ -2,17 +2,16 @@ package com.computer.hdu.truckrental;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Window;
 
 /**
- * Created by Even on 2017/1/24.
+ * Created by yjt on 2017/2/11.
  */
 
-public class ShowRuleDriverActivity extends Activity {
+public class DriverPriceDetailsShowActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.show_driver_rule);
+        setContentView(R.layout.activity_show_price_details_driver);
     }
 }

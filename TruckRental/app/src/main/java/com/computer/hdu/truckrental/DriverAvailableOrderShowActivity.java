@@ -1,30 +1,19 @@
 package com.computer.hdu.truckrental;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.computer.hdu.truckrental.beans.Driver;
 import com.computer.hdu.truckrental.beans.Order;
 import com.computer.hdu.truckrental.utils.MyAdapter;
 
@@ -35,7 +24,7 @@ import java.util.List;
  * Created by yjt on 2017/2/8.
  */
 
-public class DriverMainActivity extends AppCompatActivity {
+public class DriverAvailableOrderShowActivity extends AppCompatActivity {
     private Toolbar driverToolbar;
     private DrawerLayout driverDrawerLayout;
     private ActionBarDrawerToggle driverDrawerToggle;
@@ -56,7 +45,7 @@ public class DriverMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main_driver);
+        setContentView(R.layout.activity_show_available_order_driver);
 
         driverToolbar = (Toolbar) findViewById(R.id.toolbar_driver);
         driverLeftMenu = (ListView) findViewById(R.id.driver_left_menu);
@@ -123,7 +112,7 @@ public class DriverMainActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 put_info_Bundle(bundle, order);
-                Intent intent = new Intent(DriverMainActivity.this, ShowDetailsOrderActivity.class);
+                Intent intent = new Intent(DriverAvailableOrderShowActivity.this, DriverPriceDetailsShowActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -189,11 +178,11 @@ public class DriverMainActivity extends AppCompatActivity {
         switch (view.getId())
         {
             case R.id.driver_orders_btn:
-                Intent intent = new Intent(DriverMainActivity.this, ShowDriverAllOrdersActivity.class);
+                Intent intent = new Intent(DriverAvailableOrderShowActivity.this, DriverAllOrdersShowActivity.class);
                 startActivity(intent);
                 break;
             case R.id.driver_record_btn:
-                intent = new Intent(DriverMainActivity.this, ShowDriverCompletedOrdersActivity.class);
+                intent = new Intent(DriverAvailableOrderShowActivity.this,DriverCompletedOrdersShowActivity.class);
                 startActivity(intent);
                 break;
         }

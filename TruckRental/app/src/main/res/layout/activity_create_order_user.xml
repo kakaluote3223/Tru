@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.computer.hdu.truckrental.OrderCreateActivity"
+    tools:context="com.computer.hdu.truckrental.UserOrderCreateActivity"
     android:background="@color/colorWhiteGray">
 
     <LinearLayout

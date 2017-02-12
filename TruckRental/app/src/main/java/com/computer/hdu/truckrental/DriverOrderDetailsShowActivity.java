@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 
 /**
  * Created by yjt on 2017/2/10.
  */
 
-public class ShowDetailsOrderActivity extends Activity{
+public class DriverOrderDetailsShowActivity extends Activity{
     private TextView tv_show_price,tv_show_startDate,tv_show_distance,tv_show_remarks,tv_show_statement;
     private TextView tv_show_departure,tv_show_destination;
     private TextView tv_show_carry,tv_show_back,tv_show_followers;
@@ -23,7 +21,7 @@ public class ShowDetailsOrderActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.show_order_details);
+        setContentView(R.layout.activity_show_order_details_driver);
         Bundle bundle = getIntent().getExtras();
 
         Log.d(TAG, "onCreate: getBundle");
@@ -60,12 +58,12 @@ public class ShowDetailsOrderActivity extends Activity{
         switch (view.getId())
         {
             case R.id.btn_price_details:
-                Intent intent = new Intent(ShowDetailsOrderActivity.this,ShowDetailsPriceActivity.class);
+                Intent intent = new Intent(DriverOrderDetailsShowActivity.this,DriverPriceDetailsShowActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_take_order:
                 //跳转订单进行页面
-                intent = new Intent(ShowDetailsOrderActivity.this,ShowDetailsPriceActivity.class);
+                intent = new Intent(DriverOrderDetailsShowActivity.this,DriverPriceDetailsShowActivity.class);
                 startActivity(intent);
                 break;
         }

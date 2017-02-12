@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 
 /**
- * Created by yjt on 2017/2/11.
+ * Created by Even on 2017/1/24.
  */
 
-public class ShowDriverCompletedOrdersActivity extends Activity{
+public class DriverRuleShowActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_driver_completed_orders);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_show_rule_driver);
     }
 }

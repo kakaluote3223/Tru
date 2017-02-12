@@ -24,7 +24,7 @@ public class DriverRegisterActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //展示注册司机条款界面
-                Intent intent = new Intent(DriverRegisterActivity.this,ShowRuleDriverActivity.class);
+                Intent intent = new Intent(DriverRegisterActivity.this,DriverRuleShowActivity.class);
                 startActivity(intent);
             }
         });

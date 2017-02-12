@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".UserLoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name">
             <intent-filter>
@@ -59,7 +59,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowRuleDriverActivity"
+            android:name=".DriverRuleShowActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/label_driver_rule">
             <intent-filter>
@@ -69,7 +69,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DriverMainActivity"
+            android:name=".DriverAvailableOrderShowActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/label_main_driver">
             <intent-filter>
@@ -82,7 +82,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowDetailsOrderActivity"
+            android:name=".DriverOrderDetailsShowActivity"
             android:label="@string/order_details">
             <intent-filter>
 
@@ -91,7 +91,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowDetailsPriceActivity"
+            android:name=".DriverPriceDetailsShowActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/price_details">
             <intent-filter>
@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowDriverAllOrdersActivity"
+            android:name=".DriverAllOrdersShowActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/driver_all_orders">
             <intent-filter>
@@ -111,7 +111,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowDriverCompletedOrdersActivity"
+            android:name=".DriverCompletedOrdersShowActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/driver_completed_orders">
             <intent-filter>
@@ -121,7 +121,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OrderCreateActivity"
+            android:name=".UserOrderCreateActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/label_order_create">
             <intent-filter>

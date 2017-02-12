@@ -18,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,9 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.computer.hdu.truckrental.beans.User;
-import com.computer.hdu.truckrental.utils.Constant;
 import com.computer.hdu.truckrental.utils.DbManager;
-import com.computer.hdu.truckrental.utils.MySqliteHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +42,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  * 登录界面有email和password两个输入框
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class UserLoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     private String tag = "LoginActivity.class";
     /**
@@ -77,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_user);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -109,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mExchangeToDriver.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, DriverLoginActivity.class);
+                Intent intent = new Intent(UserLoginActivity.this, DriverLoginActivity.class);
             }
         });
 
@@ -120,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View v) {
                 //这里跳转用户注册界面
-                Intent intent = new Intent(LoginActivity.this,UserRegisterActivity.class);
+                Intent intent = new Intent(UserLoginActivity.this,UserRegisterActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"还没写呢T^T",Toast.LENGTH_SHORT).show();
             }
@@ -131,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mRegisterDriver.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,DriverRegisterActivity.class);
+                Intent intent = new Intent(UserLoginActivity.this,DriverRegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -371,7 +368,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         //创建自动填充的提示列表适配器
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
+                new ArrayAdapter<>(UserLoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);

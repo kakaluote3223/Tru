@@ -3,7 +3,6 @@ package com.computer.hdu.truckrental;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -21,7 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -30,10 +28,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.computer.hdu.truckrental.beans.Driver;
-import com.computer.hdu.truckrental.beans.User;
-import com.computer.hdu.truckrental.utils.DbManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +70,7 @@ public class DriverLoginActivity extends AppCompatActivity implements LoaderMana
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_user);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -109,7 +103,7 @@ public class DriverLoginActivity extends AppCompatActivity implements LoaderMana
         mExchangeToUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DriverLoginActivity.this, LoginActivity.class);
+                Intent intent = new Intent(DriverLoginActivity.this, DriverLoginActivity.class);
             }
         });
 
