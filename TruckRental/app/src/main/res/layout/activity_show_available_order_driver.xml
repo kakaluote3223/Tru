@@ -14,18 +14,23 @@
         android:id="@+id/toolbar_driver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary">
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:fitsSystemWindows="true">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageButton
+
+            <!--<ImageButton
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:background="@color/colorTransparent"
                 android:src="@drawable/btn_driver_info"
                 android:id="@+id/driver_info_btn" />
-
+            -->
             <!--<android.support.v7.widget.SwitchCompat-->
             <Switch
                 android:textOff="@string/prompt_driver_resting"
@@ -54,11 +59,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <ListView
-                android:id="@+id/main_driver_list"
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/SwipeRefreshLayout_driver"
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
-                />
+                android:layout_height="450dp">
+                <ListView
+                    android:id="@+id/main_driver_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+            </android.support.v4.widget.SwipeRefreshLayout>
 
             <LinearLayout
                 android:layout_marginTop="10dp"

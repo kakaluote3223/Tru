@@ -10,25 +10,25 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp">
         <TextView
-            android:id="@+id/order_start_date_view"
+            android:id="@+id/running_order_start_date_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
         <TextView
-            android:id="@+id/departure_destination_view"
+            android:id="@+id/running_departure_destination_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             />
         <TextView
-            android:id="@+id/user_level_view"
+            android:id="@+id/running_user_level_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
     </LinearLayout>
 
-    <!--<ImageButton
-        android:id="@+id/phone_btn"
+    <ImageButton
+        android:id="@+id/running_phone_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorTransparent"
@@ -36,14 +36,15 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-         />-->
-        <TextView
-            android:id="@+id/order_state_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="即时订单"
-            android:drawableTop="@drawable/order_state1"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"/>
+        />
+
+    <TextView
+        android:id="@+id/running_order_state_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="即时订单"
+        android:drawableTop="@drawable/order_state1"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/running_phone_btn"
+        android:layout_marginEnd="55dp" />
 </RelativeLayout>

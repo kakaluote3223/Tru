@@ -12,18 +12,19 @@ import android.widget.Toast;
 
 import com.computer.hdu.truckrental.R;
 import com.computer.hdu.truckrental.beans.Order;
+
 import java.util.List;
 
 /**
- * Created by yjt on 2017/2/10.
+ * Created by yjt on 2017/2/14.
  */
 
-public class MyAdapter extends BaseAdapter {
+public class running_order_Adapter extends BaseAdapter{
     private Context context;
     private List<Order> mOrder;
-    private static final String TAG = "MyAdapter";
+    private static final String TAG = "running_order_Adapter";
 
-    public MyAdapter(Context context, List<Order> order) {
+    public running_order_Adapter(Context context, List<Order> order) {
         this.context = context;
         mOrder = order;
     }
@@ -50,25 +51,25 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+        running_order_Adapter.ViewHolder holder = null;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.listveiw_driver,null);
-            holder = new ViewHolder();
-            holder.tv_departure_destination = (TextView) convertView.findViewById(R.id.departure_destination_view);
-            holder.tv_start_date = (TextView) convertView.findViewById(R.id.order_start_date_view);
-            holder.tv_user_level = (TextView) convertView.findViewById(R.id.user_level_view);
-            holder.tv_order_state = (TextView) convertView.findViewById(R.id.order_state_view);
-            //holder.view_btn =  (ImageButton) convertView.findViewById(R.id.phone_btn);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listveiw_running_orders,null);
+            holder = new running_order_Adapter.ViewHolder();
+            holder.tv_departure_destination = (TextView) convertView.findViewById(R.id.running_departure_destination_view);
+            holder.tv_start_date = (TextView) convertView.findViewById(R.id.running_order_start_date_view);
+            holder.tv_user_level = (TextView) convertView.findViewById(R.id.running_user_level_view);
+            holder.tv_order_state = (TextView) convertView.findViewById(R.id.running_order_state_view);
+            holder.view_btn=  (ImageButton) convertView.findViewById(R.id.running_phone_btn);
             convertView.setTag(holder);
         }else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (running_order_Adapter.ViewHolder) convertView.getTag();
         }
         holder.tv_departure_destination.setText(mOrder.get(position).getOrder_departure()+"--->"+mOrder.get(position).getOrder_destination());
         holder.tv_start_date.setText(mOrder.get(position).getOrder_start_date());
         holder.tv_user_level.setText("用户id:"+mOrder.get(position).getFk_user_id()+"");
         if( mOrder.get(position).getOrder_start_date().equals(mOrder.get(position).getOrder_date()) ){
             holder.tv_order_state.setText(R.string.prompt_immediate_order);
-                //这边有版本兼容性问题，故使用过时api
+            //这边有版本兼容性问题，故使用过时api
             holder.tv_order_state.setTextColor(context.getResources().getColor(R.color.red)/*,null*/);
             //holder.tv_order_state.setCompoundDrawables(null,context.getResources().getDrawable(R.drawable.order_state1),null,null);
         }else {
@@ -76,18 +77,19 @@ public class MyAdapter extends BaseAdapter {
             holder.tv_order_state.setTextColor(context.getResources().getColor(R.color.green));
             //holder.tv_order_state.setCompoundDrawables(null,context.getResources().getDrawable(R.drawable.order_state2,null),null,null);
         }
-        /*holder.view_btn.setOnClickListener(new View.OnClickListener() {
+
+        holder.view_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                *//*DriverMainActivity.call_user(mOrder.get(position).getFk_user_id()+"");
+               /* DriverMainActivity.call_user(mOrder.get(position).getFk_user_id()+"");
 
                 //打电话给用户,电话号码未传进来
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+mOrder.get(position).getFk_user_id()+""));
-                startActivity(intent);*//*
+                startActivity(intent);*/
                 Toast.makeText(context,"点击了电话按钮",Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onClick:this is phone_btn"+position);
             }
-        });*/
+        });
 
         return convertView;
     }
@@ -95,6 +97,6 @@ public class MyAdapter extends BaseAdapter {
     static class ViewHolder{
         TextView tv_departure_destination,tv_start_date,tv_user_level;
         TextView tv_order_state;
-        /*ImageButton view_btn;*/
+        ImageButton view_btn;
     }
 }

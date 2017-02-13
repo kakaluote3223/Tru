@@ -45,8 +45,15 @@
     <string name="prompt_driver_resting">休息中</string>
     <string name="prompt_driver_working">工作中</string>
     <string name="action_driver_info">我的</string>
-    <string name="action_driver_orders">全部订单</string>
-    <string name="action_driver_record">记录</string>
+    <string name="action_driver_orders">待完成订单</string>
+    <string name="action_driver_record">订单记录</string>
+    <string name="action_driver_change_password">密码修改</string>
+    <string name="action_driver_show_info">信息展示</string>
+    <string name="action_driver_show_level">等级显示</string>
+
+    <!-- String related to myAdapter-->
+    <string name="prompt_appointment_order">预约订单</string>
+    <string name="prompt_immediate_order">即时订单</string>
 
     <!-- String related to order_details-->
     <string name="take_order">立即抢单</string>
@@ -72,11 +79,16 @@
         <b>这里是计价规则三！</b>\n
     </string>
 
-    <!--String related to driver's all orders show-->
-    <string name="driver_all_orders">全部订单</string>
+    <!--String related to driver's running orders show-->
+    <string name="driver_all_orders">代完成订单</string>
+    <string name="action_navigate">开始导航</string>
 
-    <!--String related to driver's completed orders show-->
-    <string name="driver_completed_orders">记录</string>
+    <!--String related to driver's all orders show-->
+    <string name="driver_completed_orders">订单记录</string>
+    <string name="prompt_order_user_cancel">用户取消</string>
+    <string name="prompt_order_driver_cancel">司机取消</string>
+    <string name="prompt_order_finished">已完成</string>
+    <string name="prompt_order_running">进行中</string>
 
     <!-- String related to create order-->
     <string name="label_order_create">订单创建</string>
