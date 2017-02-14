@@ -51,7 +51,7 @@ public class MyAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_driver,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_available_order,null);
             holder = new ViewHolder();
             holder.tv_departure_destination = (TextView) convertView.findViewById(R.id.departure_destination_view);
             holder.tv_start_date = (TextView) convertView.findViewById(R.id.order_start_date_view);

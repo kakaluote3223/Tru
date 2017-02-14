@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import com.computer.hdu.truckrental.domain.Order;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class DriverAvailableOrderShowActivity extends AppCompatActivity {
 
@@ -30,7 +33,7 @@ public class DriverAvailableOrderShowActivity extends AppCompatActivity {
     private DrawerLayout driverDrawerLayout;
     private ActionBarDrawerToggle driverDrawerToggle;
     private ListView driverLeftMenu;
-    private String[] leftList = {"我的信息", "我的等级", "密码修改"};
+    private String[] leftList = {"我的信息", "密码修改"};
     private ArrayAdapter leftAdapter;
     //switch
     private Switch mySwitch;    //private SwitchCompat mySwitchCompat;
@@ -156,13 +159,12 @@ public class DriverAvailableOrderShowActivity extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        Toast.makeText(getApplicationContext(),"我的信息",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(DriverAvailableOrderShowActivity.this, DriverInfoShowActivity.class);
+                        startActivity(intent);
                         break;
                     case 1:
-                        Toast.makeText(getApplicationContext(),"我的等级",Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(getApplicationContext(),"密码修改",Toast.LENGTH_SHORT).show();
+                        intent = new Intent(DriverAvailableOrderShowActivity.this, DriverChangePwdActivity.class);
+                        startActivity(intent);
                         break;
                 }
             }

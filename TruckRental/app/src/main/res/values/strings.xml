@@ -102,6 +102,15 @@
     <string name="driver_all_orders">待完成订单</string>
     <string name="action_navigate">开始导航</string>
     <string name="action_cancel_order">取消订单</string>
+    <!--String related to driver change password -->
+    <string name="prompt_input_pwd">请输入密码</string>
+    <string name="prompt_pwd_invalid">密码过短,请使多于4个字符</string>
+    <string name="prompt_confirm_pwd_error">确认密码与新密码不一致，请重新输入</string>
+    <string name="prompt_old_pwd_error">输入密码错误,请重新输入</string>
+    <string name="hint_old_pwd">请输入旧密码</string>
+    <string name="hint_new_pwd">请输入新密码</string>
+    <string name="hint_confirm_pwd">请确认新密码</string>
+    <string name="action_change_pwd">确认修改</string>
 
     <!--String related to driver's all orders show-->
     <string name="driver_completed_orders">订单记录</string>
