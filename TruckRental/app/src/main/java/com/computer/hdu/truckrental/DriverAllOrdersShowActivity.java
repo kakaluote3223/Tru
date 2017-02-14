@@ -1,27 +1,23 @@
 package com.computer.hdu.truckrental;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.computer.hdu.truckrental.beans.Order;
-import com.computer.hdu.truckrental.utils.MyAdapter;
+import com.computer.hdu.truckrental.adapter.MyAdapter;
+import com.computer.hdu.truckrental.domain.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yjt on 2017/2/11.
- */
+public class DriverAllOrdersShowActivity extends AppCompatActivity {
 
-public class DriverAllOrdersShowActivity extends Activity{
-
-    private ListView all_orders_lv;
-    private List<Order> all_orders_list = new ArrayList<>();
-    private MyAdapter all_orders_adapter;
+    private ListView allOrdersListView;
+    private List<Order> allOrdersList = new ArrayList<>();
+    private MyAdapter allOrdersAdapter;
     private int totalNum,pageNum;
     private int pageSize = 15;
     private int currentPage = 1;
@@ -30,14 +26,14 @@ public class DriverAllOrdersShowActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_all_orders_driver);
+        setContentView(R.layout.activity_driver_all_orders_show);
 
-        all_orders_lv = (ListView) findViewById(R.id.all_orders_ListView);
+        allOrdersListView = (ListView) findViewById(R.id.all_orders_ListView);
         put_info_list();
-        all_orders_adapter = new MyAdapter(this,all_orders_list);
-        all_orders_lv.setAdapter(all_orders_adapter);
+        allOrdersAdapter = new MyAdapter(this,allOrdersList);
+        allOrdersListView.setAdapter(allOrdersAdapter);
 
-        all_orders_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        allOrdersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 ListView listView = (ListView) parent;
@@ -45,39 +41,11 @@ public class DriverAllOrdersShowActivity extends Activity{
 
                 Bundle bundle = new Bundle();
                 put_info_Bundle(bundle, order);
-                Intent intent = new Intent(DriverAllOrdersShowActivity.this, DriverOrderDetailsShowActivity.class);
+                Intent intent = new Intent(DriverAllOrdersShowActivity.this, DriverAllOrdersDetailsShowActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
-
-        //需要从数据库获得符合条件订单条数
-        /*totalNum = DbManager.getDataCount(db,Constant.TABLE_NAME);
-        pageNum = (int) Math.ceil(totalNum/(double)pageSize);
-        if(currentPage == 1){
-            //添加数据
-            totalList = DbManager.getListByCurrentPage(db,Constant.TABLE_NAME,currentPage,pageSize);
-        }*/
-        /**
-         * listview滚动监听
-         */
-        /*myListview.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
-                if(isDivPage && AbsListView.OnScrollListener.SCROLL_STATE_IDLE == scrollState){
-                    if (currentPage < pageNum){
-                        currentPage++;
-                        //数据添加
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                isDivPage = ((firstVisibleItem+visibleItemCount) == totalItemCount);
-            }
-        });*/
     }
 
     private void put_info_Bundle(Bundle bundle, Order order){
@@ -89,6 +57,7 @@ public class DriverAllOrdersShowActivity extends Activity{
         bundle.putString("备注", order.getOrder_remarks());
         bundle.putFloat("路程数", order.getOrder_distance());
         bundle.putFloat("金额", order.getOrder_price());
+        bundle.putInt("订单状态",order.getOrder_state());
         bundle.putInt("是否回程", order.getOrder_back());
         bundle.putInt("是否搬运", order.getOrder_carry());
         bundle.putInt("跟车人数", order.getOrder_followers());
@@ -105,9 +74,26 @@ public class DriverAllOrdersShowActivity extends Activity{
         order1.setOrder_remarks("无");
         order1.setOrder_distance(12);
         order1.setOrder_price(54);
+        order1.setOrder_state(1);
         order1.setOrder_back(1);
         order1.setOrder_carry(1);
         order1.setOrder_followers(2);
-        all_orders_list.add(order1);
+        allOrdersList.add(order1);
+
+        Order order2 = new Order();
+        order2.setOrder_start_date("2017/2/11");
+        order2.setFk_user_id(2);
+        order2.setOrder_departure("杭州");
+        order2.setOrder_destination("江西");
+        order2.setOrder_date("2017/2/10");
+        order2.setOrder_number("111");
+        order2.setOrder_remarks("我是订单二");
+        order2.setOrder_distance(123);
+        order2.setOrder_price(55);
+        order2.setOrder_state(2);
+        order2.setOrder_back(1);
+        order2.setOrder_carry(1);
+        order2.setOrder_followers(3);
+        allOrdersList.add(order2);
     }
 }

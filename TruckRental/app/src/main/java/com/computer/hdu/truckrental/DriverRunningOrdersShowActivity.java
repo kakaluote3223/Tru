@@ -3,15 +3,13 @@ package com.computer.hdu.truckrental;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.computer.hdu.truckrental.beans.Order;
-import com.computer.hdu.truckrental.utils.MyAdapter;
-import com.computer.hdu.truckrental.utils.running_order_Adapter;
+import com.computer.hdu.truckrental.domain.Order;
+import com.computer.hdu.truckrental.adapter.RunningOrderAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +20,12 @@ import java.util.List;
 
 public class DriverRunningOrdersShowActivity extends Activity{
 
+    private static final String TAG = "DriverRunningOrdersShow";
     private static final int REFRESH_COMPLETE = 0X110;
-    private ListView running_orders_lv;
-    private SwipeRefreshLayout running_orders_srl;
-    private List<Order> running_orders_list = new ArrayList<>();
-    private running_order_Adapter running_orders_adapter;
+    private ListView runningOrderLv;
+    private SwipeRefreshLayout runningOrderSrl;
+    private List<Order> runningOrderList = new ArrayList<>();
+    private RunningOrderAdapter runningOrderAdapter;
     private int totalNum,pageNum;
     private int pageSize = 15;
     private int currentPage = 1;
@@ -66,13 +65,13 @@ public class DriverRunningOrdersShowActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_running_orders_driver);
-        running_orders_lv = (ListView) findViewById(R.id.running_orders_ListView);
+        setContentView(R.layout.activity_driver_running_orders_show);
+        runningOrderLv = (ListView) findViewById(R.id.running_orders_ListView);
         //running_orders_srl = (SwipeRefreshLayout) findViewById(R.id.running_orders_SwipeRefreshLayout);
 
         put_info_list();
-        running_orders_adapter = new running_order_Adapter(this,running_orders_list);
-        running_orders_lv.setAdapter(running_orders_adapter);
+        runningOrderAdapter = new RunningOrderAdapter(this,runningOrderList);
+        runningOrderLv.setAdapter(runningOrderAdapter);
 
        /* //下拉刷新
         running_orders_srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -83,9 +82,10 @@ public class DriverRunningOrdersShowActivity extends Activity{
         });
         running_orders_srl.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
-*/
+        */
+        
         //item点击事件
-        running_orders_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        runningOrderLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 ListView listView = (ListView) parent;
@@ -96,21 +96,6 @@ public class DriverRunningOrdersShowActivity extends Activity{
                 Intent intent = new Intent(DriverRunningOrdersShowActivity.this, DriverRunningOrdersDetailsShowActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                /*
-                    //当前传入的是错误数据,传回电话号码
-                    final String phone_num = order.getOrder_departure();
-
-                    //1.在item点击里面写按钮监听事件
-                    //2.在myadapter里面写按钮监听时间,这个方法不是很灵敏，不知道为什么放弃先
-
-                    view.findViewById(R.id.phone_btn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(),"打电话功能",Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onClick: 打电话功能"+position);
-                        //call_user(phone_num);
-                    }
-                });*/
             }
         });
 
@@ -121,9 +106,7 @@ public class DriverRunningOrdersShowActivity extends Activity{
             //添加数据
             totalList = DbManager.getListByCurrentPage(db,Constant.TABLE_NAME,currentPage,pageSize);
         }*/
-        /**
-         * listview滚动监听
-         */
+        
         /*myListview.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
@@ -171,6 +154,6 @@ public class DriverRunningOrdersShowActivity extends Activity{
         order1.setOrder_back(1);
         order1.setOrder_carry(1);
         order1.setOrder_followers(2);
-        running_orders_list.add(order1);
+        runningOrderList.add(order1);
     }
 }

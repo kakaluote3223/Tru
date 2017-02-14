@@ -1,6 +1,8 @@
 package com.computer.hdu.truckrental.tools;
 
-import com.computer.hdu.truckrental.beans.*;
+import com.computer.hdu.truckrental.domain.Driver;
+import com.computer.hdu.truckrental.domain.Order;
+import com.computer.hdu.truckrental.domain.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -219,7 +221,7 @@ public class Check {
 
         if ((state = checkPhone(user.getUser_phone().toString())) != SUCCEED){
             //do nothing
-        }else if ((state = checkUserLevel(user.getUser_level())) != SUCCEED){
+        }else if ((state = checkUserLevel(user.getUser_level().intValue())) != SUCCEED){
             //do nothing
         }else{
             state = OUT_OF_CONDITION;
@@ -233,15 +235,15 @@ public class Check {
 
         int state = SUCCEED;
 
-        if ((state = checkOrderState(order.getOrder_state())) != SUCCEED){
+        if ((state = checkOrderState(order.getOrder_state().intValue())) != SUCCEED){
             //do nothing
-        }else if ((state = checkOrderScore(order.getOrder_score())) != SUCCEED){
+        }else if ((state = checkOrderScore(order.getOrder_score().intValue())) != SUCCEED){
             //do nothing
-        }else if ((state = checkOrderBack(order.getOrder_back())) != SUCCEED){
+        }else if ((state = checkOrderBack(order.getOrder_back().intValue())) != SUCCEED){
             //do nothing
-        }else if ((state = checkOrderCarry(order.getOrder_carry())) != SUCCEED){
+        }else if ((state = checkOrderCarry(order.getOrder_carry().intValue())) != SUCCEED){
             //do nothing
-        }else if ((state = checkOrderFollowers(carType, order.getOrder_followers())) != SUCCEED){
+        }else if ((state = checkOrderFollowers(carType, order.getOrder_followers().intValue())) != SUCCEED){
             //do nothing
         }else{
             state = OUT_OF_CONDITION;
@@ -254,13 +256,13 @@ public class Check {
     public static int checkDriver(Driver driver){
         int state = SUCCEED;
 
-        if ((state = checkDriverCarType(driver.getDriver_car_type())) != SUCCEED){
+        if ((state = checkDriverCarType(driver.getDriver_car_type().intValue())) != SUCCEED){
             //do nothing
-        }else if ((state = checkDriverLevel(driver.getDriver_level())) != SUCCEED){
+        }else if ((state = checkDriverLevel(driver.getDriver_level().intValue())) != SUCCEED){
             //do nothing
-        }else if ((state = checkDriverScore(driver.getDriver_score())) != SUCCEED){
+        }else if ((state = checkDriverScore(driver.getDriver_score().intValue())) != SUCCEED){
             //do nothing
-        }else if ((state = checkDriverState(driver.getDriver_state())) != SUCCEED){
+        }else if ((state = checkDriverState(driver.getDriver_state().intValue())) != SUCCEED){
             //do nothing
         }else{
             state = OUT_OF_CONDITION;

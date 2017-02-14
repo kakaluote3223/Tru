@@ -1,4 +1,4 @@
-package com.computer.hdu.truckrental.utils;
+package com.computer.hdu.truckrental.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,20 +11,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.computer.hdu.truckrental.R;
-import com.computer.hdu.truckrental.beans.Order;
+import com.computer.hdu.truckrental.domain.Order;
 
 import java.util.List;
 
 /**
- * Created by yjt on 2017/2/14.
+ * Created by hanjianhao on 17/2/14.
  */
 
-public class running_order_Adapter extends BaseAdapter{
+public class RunningOrderAdapter extends BaseAdapter {
+
     private Context context;
     private List<Order> mOrder;
-    private static final String TAG = "running_order_Adapter";
+    private static final String TAG = "RunningOrderAdapter";
 
-    public running_order_Adapter(Context context, List<Order> order) {
+    public RunningOrderAdapter(Context context, List<Order> order) {
         this.context = context;
         mOrder = order;
     }
@@ -51,10 +52,10 @@ public class running_order_Adapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        running_order_Adapter.ViewHolder holder = null;
+        RunningOrderAdapter.ViewHolder holder = null;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.listveiw_running_orders,null);
-            holder = new running_order_Adapter.ViewHolder();
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_running_orders,null);
+            holder = new RunningOrderAdapter.ViewHolder();
             holder.tv_departure_destination = (TextView) convertView.findViewById(R.id.running_departure_destination_view);
             holder.tv_start_date = (TextView) convertView.findViewById(R.id.running_order_start_date_view);
             holder.tv_user_level = (TextView) convertView.findViewById(R.id.running_user_level_view);
@@ -62,7 +63,7 @@ public class running_order_Adapter extends BaseAdapter{
             holder.view_btn=  (ImageButton) convertView.findViewById(R.id.running_phone_btn);
             convertView.setTag(holder);
         }else {
-            holder = (running_order_Adapter.ViewHolder) convertView.getTag();
+            holder = (RunningOrderAdapter.ViewHolder) convertView.getTag();
         }
         holder.tv_departure_destination.setText(mOrder.get(position).getOrder_departure()+"--->"+mOrder.get(position).getOrder_destination());
         holder.tv_start_date.setText(mOrder.get(position).getOrder_start_date());

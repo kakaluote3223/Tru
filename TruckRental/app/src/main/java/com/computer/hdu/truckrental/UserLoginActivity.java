@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -29,9 +30,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.computer.hdu.truckrental.beans.User;
-import com.computer.hdu.truckrental.utils.DbManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class UserLoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    private String tag = "LoginActivity.class";
+    private String tag = "UserLoginActivity.class";
     /**
      * Id to identity READ_CONTACTS permission request.
      * 读取用户通讯录
@@ -52,7 +50,7 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known home_btn_user names and passwords.
+     * A dummy authentication store containing known btn_home_user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      * 模拟授权的账户
      */
@@ -74,8 +72,8 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login_user);
-
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -85,16 +83,18 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 //当用户处在输入密码编辑框，软键盘打开，输入确定按钮(EditorInfo.IME_NUL)时尝试登录
+                //按回车键进行登录
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
+                    Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 return false;
             }
         });
         //登录按钮点击事件
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_btn);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button mEmailSignInBtn = (Button) findViewById(R.id.email_sign_in_btn);
+        mEmailSignInBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -102,18 +102,19 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
         });
 
         //转换为司机登录界面
-        ImageButton mExchangeToDriver = (ImageButton) findViewById(R.id.exchange_to_driver_btn);
-        mExchangeToDriver.setOnClickListener(new OnClickListener() {
+        ImageButton mExchangeToDriverBtn = (ImageButton) findViewById(R.id.exchange_to_driver_btn);
+        mExchangeToDriverBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserLoginActivity.this, DriverLoginActivity.class);
+                Intent intent = new Intent(UserLoginActivity.this,OrderCreateActivity.class);//测试用
+                startActivity(intent);
             }
         });
 
 
         //用户注册按钮
-        Button mRegisterUser = (Button) findViewById(R.id.register_user_btn);
-        mRegisterUser.setOnClickListener(new OnClickListener() {
+        Button mRegisterUserBtn = (Button) findViewById(R.id.register_user_btn);
+        mRegisterUserBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 //这里跳转用户注册界面
@@ -124,8 +125,8 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
         });
 
         //司机注册按钮
-        Button mRegisterDriver = (Button) findViewById(R.id.register_driver_btn);
-        mRegisterDriver.setOnClickListener(new OnClickListener() {
+        Button mRegisterDriverBtn = (Button) findViewById(R.id.register_driver_btn);
+        mRegisterDriverBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserLoginActivity.this,DriverRegisterActivity.class);
@@ -137,22 +138,13 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    //这里测试下userDao中的功能
+    //这里测试下功能
     @Override
     protected void onResume() {
         super.onResume();
-        DbManager  DbOperate = new DbManager(getApplicationContext());
-        User user = new User("123456789");
-        DbOperate.InsertUser(user);
-        //DbOperate.SelectUserByPhone("123456789");
-        //String sql = "select * from "+ Constant.USERS ;
-        //DbOperate.SelectUserBySql(sql,null);
-        //DbOperate.InsertUser(user);
-        //Log.d(tag,"----用户插入----");
+   /*     UserDao userDao = new UserDao(getApplicationContext());
+         userDao.addUser("123456789",3);
 
-       // UserDao userDao = new UserDao(getApplicationContext());
-        /*userDao.addUser("123456789",3);
-        Log.d(tag,"增加用户");
         userDao.updateUserLevel(1,3);
         User user = userDao.findUserAll().get(0);
         Log.d(tag,user.getUser_id().toString());
@@ -162,6 +154,41 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
         if(userDao.findUserAll()==null){
             Log.d(tag,"被删除掉了！");
         }*/
+
+/*        DriverDao driverDao =new DriverDao(getApplicationContext());
+        Driver driver = new Driver();
+        driver.setDriver_name("一号司机");
+        driver.setDriver_phone("123456789");
+        driver.setDriver_pwd("123456789");
+        driver.setDriver_car_type(1);
+        driver.setDriver_city("成都");
+        driver.setDriver_license_plate("123456789");
+        driver.setDriver_license("12345");
+        driver.setDriver_level(5);//初始信用等级为5
+        driver.setDriver_score(100);//初始评分为100
+        driver.setDriver_state(0);//状态为审核中
+        driverDao.addDriver(driver);
+
+        driver.setDriver_name("2号司机");
+        driver.setDriver_phone("987654321");
+        driver.setDriver_pwd("123456789");
+        driver.setDriver_car_type(1);
+        driver.setDriver_city("成都");
+        driver.setDriver_license_plate("987654321");
+        driver.setDriver_license("54321");
+        driver.setDriver_level(5);//初始信用等级为5
+        driver.setDriver_score(100);//初始评分为100
+        driver.setDriver_state(0);//状态为审核中
+        driverDao.addDriver(driver);
+
+        driverDao.showDriver(driverDao.findDriverById(1));
+        driverDao.showDriver(driverDao.findDriverById(2));
+        List<Driver> driverList;
+        driverList = driverDao.findDriverListByCarType(1);
+        driverDao.showDriver(driverList.get(0));
+        driverDao.showDriver(driverList.get(1));
+        */
+
     }
 
     //加载本地账户
@@ -235,7 +262,7 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
             //错误处理
         }
 
-        // Check for a valid password, if the home_btn_user entered one.
+        // Check for a valid password, if the btn_home_user entered one.
         //检查密码有效性
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
@@ -261,10 +288,10 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
-            // perform the home_btn_user login attempt.
+            // perform the btn_home_user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask.execute((Void) null);//执行异步任务
         }
     }
     private boolean isEmailValid(String email) {
@@ -319,7 +346,7 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
-                // Retrieve data rows for the device home_btn_user's 'profile' contact.
+                // Retrieve data rows for the device btn_home_user's 'profile' contact.
                 //遍历用户的profile数据
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
@@ -331,7 +358,7 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
                                                                      .CONTENT_ITEM_TYPE},
 
                 // Show primary email addresses first. Note that there won't be
-                // a primary email address if the home_btn_user hasn't specified one.
+                // a primary email address if the btn_home_user hasn't specified one.
                 // 按照用户的输入显示排序的邮箱地址
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
@@ -376,7 +403,7 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
-     * the home_btn_user.
+     * the btn_home_user.
      * 显示异步登录注册任务，继承异步任务
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
@@ -423,6 +450,8 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
             if (success) {
                 finish();
                 Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserLoginActivity.this,OrderCreateActivity.class);
+                startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

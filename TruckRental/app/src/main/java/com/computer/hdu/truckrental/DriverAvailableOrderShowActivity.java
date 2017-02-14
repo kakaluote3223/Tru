@@ -2,18 +2,14 @@ package com.computer.hdu.truckrental;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -21,17 +17,14 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.computer.hdu.truckrental.beans.Order;
-import com.computer.hdu.truckrental.utils.MyAdapter;
+import com.computer.hdu.truckrental.adapter.MyAdapter;
+import com.computer.hdu.truckrental.domain.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yjt on 2017/2/8.
- */
-
 public class DriverAvailableOrderShowActivity extends AppCompatActivity {
+
     //侧滑菜单
     private Toolbar driverToolbar;
     private DrawerLayout driverDrawerLayout;
@@ -58,37 +51,36 @@ public class DriverAvailableOrderShowActivity extends AppCompatActivity {
     {
         public void handleMessage(android.os.Message msg)
         {
-            switch (msg.what)
-            {
-                case REFRESH_COMPLETE:
-                    Order order2 = new Order();
-                    order2.setOrder_start_date("2017/2/11");
-                    order2.setFk_user_id(2);
-                    order2.setOrder_departure("杭州");
-                    order2.setOrder_destination("江西");
-                    order2.setOrder_date("2017/2/10");
-                    order2.setOrder_number("111");
-                    order2.setOrder_remarks("无");
-                    order2.setOrder_distance(12);
-                    order2.setOrder_price(54);
-                    order2.setOrder_back(1);
-                    order2.setOrder_carry(1);
-                    order2.setOrder_followers(2);
-                    totalList.add(order2);
+        switch (msg.what)
+        {
+            case REFRESH_COMPLETE:
+                Order order2 = new Order();
+                order2.setOrder_start_date("2017/2/11");
+                order2.setFk_user_id(2);
+                order2.setOrder_departure("杭州");
+                order2.setOrder_destination("江西");
+                order2.setOrder_date("2017/2/10");
+                order2.setOrder_number("111");
+                order2.setOrder_remarks("无");
+                order2.setOrder_distance(12);
+                order2.setOrder_price(54);
+                order2.setOrder_back(1);
+                order2.setOrder_carry(1);
+                order2.setOrder_followers(2);
+                totalList.add(order2);
 
-                    myAdapter.notifyDataSetChanged();
-                    driverSwipeLayout.setRefreshing(false);
-                    break;
+                myAdapter.notifyDataSetChanged();
+                driverSwipeLayout.setRefreshing(false);
+                break;
 
-            }
+        }
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_show_available_order_driver);
+        setContentView(R.layout.activity_driver_available_order_show);
 
         driverToolbar = (Toolbar) findViewById(R.id.toolbar_driver);
         driverLeftMenu = (ListView) findViewById(R.id.driver_left_menu);
@@ -190,64 +182,10 @@ public class DriverAvailableOrderShowActivity extends AppCompatActivity {
                 Intent intent = new Intent(DriverAvailableOrderShowActivity.this, DriverOrderDetailsShowActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-
-                /*
-                    //当前传入的是错误数据,传回电话号码
-                    final String phone_num = order.getOrder_departure();
-
-                    //1.在item点击里面写按钮监听事件
-                    //2.在myadapter里面写按钮监听时间,这个方法不是很灵敏，不知道为什么放弃先
-
-                    view.findViewById(R.id.phone_btn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(),"打电话功能",Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onClick: 打电话功能"+position);
-                        //call_user(phone_num);
-                    }
-                });*/
             }
         });
 
-        //需要从数据库获得符合条件订单条数
-        /*totalNum = DbManager.getDataCount(db,Constant.TABLE_NAME);
-        pageNum = (int) Math.ceil(totalNum/(double)pageSize);
-        if(currentPage == 1){
-            //添加数据
-            totalList = DbManager.getListByCurrentPage(db,Constant.TABLE_NAME,currentPage,pageSize);
-        }*/
-        /**
-         * listview滚动监听,应添加在switch的checked中
-         */
-        /*myListview.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
-                if(isDivPage && AbsListView.OnScrollListener.SCROLL_STATE_IDLE == scrollState){
-                    if (currentPage < pageNum){
-                        currentPage++;
-                        //数据添加
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                isDivPage = ((firstVisibleItem+visibleItemCount) == totalItemCount);
-            }
-        });*/
     }
-
-    /*public void call_user(String user_phone) {
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + user_phone));
-        try {
-            startActivity(intent);
-            //需要的操作
-            //DoSomething();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public void show_orders(View view){
         switch (view.getId())
@@ -262,13 +200,6 @@ public class DriverAvailableOrderShowActivity extends AppCompatActivity {
                 break;
         }
     }
-
-    /*public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.driver_left_menu, menu);
-        *//*MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.sub_menu, menu);*//*
-        return true;
-    }*/
 
     private void put_info_Bundle(Bundle bundle, Order order){
         bundle.putString("运货时间", order.getOrder_start_date());

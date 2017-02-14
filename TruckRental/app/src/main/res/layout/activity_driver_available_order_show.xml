@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -23,15 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--<ImageButton
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@color/colorTransparent"
-                android:src="@drawable/btn_driver_info"
-                android:id="@+id/driver_info_btn" />
-            -->
-            <!--<android.support.v7.widget.SwitchCompat-->
             <Switch
                 android:textOff="@string/prompt_driver_resting"
                 android:textOn="@string/prompt_driver_working"

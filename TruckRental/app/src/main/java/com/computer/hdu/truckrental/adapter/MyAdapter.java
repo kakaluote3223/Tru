@@ -1,24 +1,23 @@
-package com.computer.hdu.truckrental.utils;
+package com.computer.hdu.truckrental.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.computer.hdu.truckrental.R;
-import com.computer.hdu.truckrental.beans.Order;
+import com.computer.hdu.truckrental.domain.Order;
+
 import java.util.List;
 
 /**
- * Created by yjt on 2017/2/10.
+ * Created by hanjianhao on 17/2/14.
  */
 
 public class MyAdapter extends BaseAdapter {
+
     private Context context;
     private List<Order> mOrder;
     private static final String TAG = "MyAdapter";
@@ -52,7 +51,7 @@ public class MyAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.listveiw_driver,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_driver,null);
             holder = new ViewHolder();
             holder.tv_departure_destination = (TextView) convertView.findViewById(R.id.departure_destination_view);
             holder.tv_start_date = (TextView) convertView.findViewById(R.id.order_start_date_view);
@@ -68,7 +67,7 @@ public class MyAdapter extends BaseAdapter {
         holder.tv_user_level.setText("用户id:"+mOrder.get(position).getFk_user_id()+"");
         if( mOrder.get(position).getOrder_start_date().equals(mOrder.get(position).getOrder_date()) ){
             holder.tv_order_state.setText(R.string.prompt_immediate_order);
-                //这边有版本兼容性问题，故使用过时api
+            //这边有版本兼容性问题，故使用过时api
             holder.tv_order_state.setTextColor(context.getResources().getColor(R.color.red)/*,null*/);
             //holder.tv_order_state.setCompoundDrawables(null,context.getResources().getDrawable(R.drawable.order_state1),null,null);
         }else {
