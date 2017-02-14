@@ -5,7 +5,8 @@
 
 * 部分控件布局修改
 * 下拉刷新实现
-ps：有以下bug:intent传达数据方式由bundle改掉，
+<br>ps：<br>
+有以下bug:intent传递数据方式由bundle改掉
 
 **明天任务：**
 
