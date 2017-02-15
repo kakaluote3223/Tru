@@ -106,8 +106,9 @@ public class UserLoginActivity extends AppCompatActivity implements LoaderCallba
         mExchangeToDriverBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserLoginActivity.this,OrderCreateActivity.class);//测试用
+                Intent intent = new Intent(UserLoginActivity.this,DriverLoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
